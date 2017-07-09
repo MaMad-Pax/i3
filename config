@@ -1,0 +1,281 @@
+# i3wm config file (~/.i3/config)
+
+
+# Mod (Super)
+set $mod Mod4
+
+
+# Font
+font pango:Comic Sans MS 10
+
+# customize workspace name
+set $WS1  1
+set $WS2  2
+set $WS3  3
+set $WS4  4
+set $WS5  5  
+set $WS6  6
+set $WS7  7  
+set $WS8  8 
+set $WS9  9  
+set $WS0  0 
+
+ 
+# switch to workspace
+bindsym $mod+1 workspace $WS1
+bindsym $mod+2 workspace $WS2
+bindsym $mod+3 workspace $WS3
+bindsym $mod+4 workspace $WS4
+bindsym $mod+5 workspace $WS5
+bindsym $mod+6 workspace $WS6
+bindsym $mod+7 workspace $WS7
+bindsym $mod+8 workspace $WS8
+bindsym $mod+9 workspace $WS9
+bindsym $mod+0 workspace $WS0
+ 
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $WS1
+bindsym $mod+Shift+2 move container to workspace $WS2
+bindsym $mod+Shift+3 move container to workspace $WS3
+bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+5 move container to workspace $WS5
+bindsym $mod+Shift+6 move container to workspace $WS6
+bindsym $mod+Shift+7 move container to workspace $WS7
+bindsym $mod+Shift+8 move container to workspace $WS8
+bindsym $mod+Shift+9 move container to workspace $WS9
+bindsym $mod+Shift+0 move container to workspace $WS0
+
+
+# Floating modifier
+floating_modifier $mod
+
+
+# start a terminal
+# bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec urxvt -T ''
+
+
+# Kill
+bindsym $mod+Shift+q kill
+
+
+# Launcher
+bindsym $mod+d exec --no-startup-id dmenu_run -p RUN: -sb '#0000ff' -nb '#2D2D2D' -fn "-xos4-terminus-r-normal-*-14-*-*-*-*-*-iso10646-*"
+bindsym $mod+shift+f exec rofi -show run -lines 10 -eh 1 -width 600 -padding 8 -opacity 95 -font vazir\ 10 
+
+
+
+# Change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+
+# Move window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+
+# Horizontal split
+bindsym $mod+h split h
+
+
+
+# Vertical split
+bindsym $mod+v split v
+
+
+# Fullscreen
+bindsym $mod+f fullscreen toggle
+
+
+# Container layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec "xbacklight -inc 10"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 10"
+
+
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+
+# Some App Shortcuts
+bindsym $mod+F1 exec urxvt -bg grey17 -fg grey67 -fn "xft:Mono Space:pixelsize=16" +sb -depth 32 -pr white -uc -bc -sl 100000 -e ranger
+bindsym $mod+F2 exec urxvt -bg grey17 -fg grey67 -fn "xft:Mono Space:pixelsize=16" +sb -depth 32 -pr white -uc -bc -sl 100000 -e mocp -T yellow_red_theme
+
+
+
+# Change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+#Screenshot
+#bindsym Print exec "gnome-screenshot"
+
+#screenshot
+bindsym --release Print exec scrot $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
+bindsym --release shift + Print exec scrot $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).jpg                            
+
+
+                            
+
+
+
+
+# Programs run as which Workspace
+assign [class="mocp"] $WS1
+assign [class="Opera"] $WS2
+assign [class="Thunar"] $WS3
+assign [class="rxvt"] $WS4
+
+
+
+
+# Reload configuration
+bindsym $mod+Shift+c reload
+
+
+# Inplace restart
+bindsym $mod+Shift+r restart
+
+
+################ Exit #####################
+set $mode_system System (l) lock, (e) logout, (h) hibernate, (r) reboot, (s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id i3lock-fancy, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym s exec --no-startup-id systemctl poweroff, mode "default"
+ 
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+shift+e mode "$mode_system"
+##########################################
+
+
+# My shortcuts
+bindsym $mod+Shift+s exec "~/bin/i3-prompt-shortcuts"
+
+
+
+# Color Class               Border      BG         FG
+client.focused             #1793D0   #1793D0    #FFFFFF
+client.focused_inactive    #000000   #333333    #FFFFFF
+client.unfocused           #000000   #333333    #FFFFFF
+client.urgent              #FF0000   #FF0000    #FF0000
+# bar.focused                #1793D0   #000000    #FFFFFF
+# bar.unfocused              #333333   #000000    #FFFFFF
+# bar.urgent                 #FF0000 #000000 #FF0000
+
+
+
+
+# Resize
+mode "resize" {
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+
+
+#############################
+### settings for i3-gaps ###
+#############################
+
+
+for_window [class="^.*"] border pixel 1
+
+gaps inner 10
+gaps outer 0
+
+smart_gaps on
+smart_borders on
+
+
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+
+###############
+
+
+
+# Startup programs
+#exec --no-startup-id
+exec --no-startup-id nm-applet
+exec xrdb -merge ~/.i3/Files/urxvt/.Xresources # URxvt Config
+exec --no-startup-id /usr/bin/kbdd # Automatic Chaneg Layout
+exec --no-startup-id /usr/bin/feh --bg-fill ~/.i3/Files/wallpaper/$(( ( RANDOM % 42) + 1 )).jpg # Set Background
+exec --no-startup-id setxkbmap -layout us,ir -option 'grp:alt_shift_toggle'
+exec_always compton -b
+exec --no-startup-id udiskie -a -t -F &
+exec --no-startup-id clipit
+exec --no-startup-id xrdb -merge -I$HOME ~/.Xresources
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id ~/.config/polybar/launch.sh
+exec killall i3blocks
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set 'Master' 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set 'Master' 5%-
+bindsym XF86AudioMute exec --no-startup-id amixer sset Master toggle && twmnc -t "Volume mute"
+
+################ Touch Pad ##################
+exec synclient HorizScrollDelta=-65 VertScrollDelta=-65
+# Turn off edge scrolling
+exec synclient HorizEdgeScroll=1 VertEdgeScroll=1
+# Turn off tap click (single finger, two finger, and 3 finger)
+exec synclient TapButton1=1 TapButton2=1 TapButton3=1
+#############################################
+
