@@ -1,0 +1,3 @@
+install : vim-airline - vim-airline-theme - vim-jedi - nredtree - vim-clock - L9
+
+for vim configuration
