@@ -9,8 +9,10 @@
 7 : feh
 8 : compton
 9 : nitrogen
-10 : polybar
+10 : i3blocks
 11 : redshift
 12 : rofi
 13 : dmenu
 14 : urxvt
+15 : tmux
+16 : vim
